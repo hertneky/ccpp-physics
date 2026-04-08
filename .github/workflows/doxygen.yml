@@ -64,12 +64,14 @@ jobs:
         git checkout v7.0.0
         git submodule update --init --recursive
 
+ccpp/physics/physics/docs/
     - name: Generate metadata tables v7 branch
       run: |
         cd scm_repo
         mkdir -p ccpp/physics/physics/docs/doc/html/V7
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
-        ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py -o ccpp/physics/physics/docs/doc/html
+        ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py
+        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
 
     - name: Build v7 docs
       run: |
