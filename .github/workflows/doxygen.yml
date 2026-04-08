@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - scidocs_hsd_aqua
+      - scidocs_test
   workflow_dispatch:
 
 jobs:
@@ -100,8 +100,8 @@ jobs:
       run: |
         cd scm_repo/ccpp/physics
         git remote set-url origin https://github.com/hertneky/ccpp-physics.git
-        git fetch origin scidocs_hsd_aqua
-        git checkout -B scidocs_hsd_aqua FETCH_HEAD
+        git fetch origin scidocs_test
+        git checkout -B scidocs_test FETCH_HEAD
 
     - name: Build landing page
       run: |
