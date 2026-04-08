@@ -59,9 +59,8 @@ jobs:
     - name: Switch physics submodule to v7 branch
       run: |
         cd scm_repo/ccpp/physics
-        git fetch origin
+        git fetch --tags
         git checkout v7.0.0
-        git pull origin v7.0.0
 
     - name: Generate metadata tables v7 branch
       run: |
