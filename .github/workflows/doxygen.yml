@@ -74,7 +74,7 @@ jobs:
     - name: Build v7 docs
       run: |
         cd scm_repo/ccpp/physics/physics/docs
-        doxygen ccpphsd_doxyfile
+        doxygen ccpp_doxyfile
         mv doc/html/* $GITHUB_WORKSPACE/physics/docs/html/V7
 
     - name: Switch physics submodule to SRWv3 (ufs-community)
