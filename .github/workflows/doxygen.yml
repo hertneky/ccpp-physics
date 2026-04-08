@@ -64,7 +64,6 @@ jobs:
         git checkout v7.0.0
         git submodule update --init --recursive
 
-ccpp/physics/physics/docs/
     - name: Generate metadata tables v7 branch
       run: |
         cd scm_repo
