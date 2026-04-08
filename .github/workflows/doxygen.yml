@@ -42,19 +42,28 @@ jobs:
         repository: NCAR/ccpp-scm
         path: scm_repo
         fetch-depth: 0
-        submodules: recursive 
+        submodules: recursive
+
+    - name: Switch physics submodule to scidocs_test
+      run: |
+        cd scm_repo/ccpp/physics
+        git remote set-url origin https://github.com/hertneky/ccpp-physics.git
+        git fetch origin scidocs_test
+        git checkout scidocs_test
 
     - name: Generate metadata tables main branch
       run: |
         cd scm_repo
-        mkdir -p $GITHUB_WORKSPACE/physics/docs/html/HSD
+        mkdir -p ccpp/physics/physics/docs/doc/html
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
-        ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py -o $GITHUB_WORKSPACE/physics/docs/html/HSD
+        ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py
+        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
 
     - name: Build HSD docs
       run: |
         cd scm_repo/ccpp/physics/physics/docs
         doxygen ccpphsd_doxyfile
+        mkdir -p $GITHUB_WORKSPACE/physics/docs/html/HSD
         mv doc/html/* $GITHUB_WORKSPACE/physics/docs/html/HSD
 
     - name: Switch to v7 tag
@@ -67,7 +76,7 @@ jobs:
     - name: Generate metadata tables v7 branch
       run: |
         cd scm_repo
-        mkdir -p ccpp/physics/physics/docs/doc/html/V7
+        mkdir -p ccpp/physics/physics/docs/doc/html
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
         ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py
         mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
