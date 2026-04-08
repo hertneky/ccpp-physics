@@ -41,6 +41,7 @@ jobs:
       with:
         repository: NCAR/ccpp-scm
         path: scm_repo
+        fetch-depth: 0
         submodules: recursive 
 
     - name: Generate metadata tables main branch
@@ -59,7 +60,7 @@ jobs:
     - name: Switch to v7 tag
       run: |
         cd scm_repo
-        git fetch --tags
+        git fetch origin tag v7.0.0
         git checkout v7.0.0
         git submodule update --init --recursive
 
