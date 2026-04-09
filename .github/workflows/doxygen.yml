@@ -100,7 +100,8 @@ jobs:
         cd scm_repo
         mkdir -p $GITHUB_WORKSPACE/physics/docs/html/SRWv3
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
-        #./ccpp/framework/scripts/metadata2html.py -c $GITHUB_WORKSPACE/ccpp_repo/physics/docs/pdftxt/RE300/ccpp_prebuild_config.py -o $GITHUB_WORKSPACE/physics/docs/html/SRWv3
+        ./ccpp/framework/scripts/metadata2html.py -c $GITHUB_WORKSPACE/ccpp_repo/physics/docs/pdftxt/RE300/ccpp_prebuild_config.py
+        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
 
     - name: Build SRWv3 docs
       run: |
@@ -119,7 +120,7 @@ jobs:
       run: |
         cd scm_repo/ccpp/physics/physics/docs
         doxygen mainpage_doxyfile
-        mv html/*html $GITHUB_WORKSPACE/physics/docs/html
+        mv html/*.* $GITHUB_WORKSPACE/physics/docs/html
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
