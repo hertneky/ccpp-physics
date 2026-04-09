@@ -48,8 +48,8 @@ jobs:
       run: |
         cd scm_repo/ccpp/physics
         git remote set-url origin https://github.com/hertneky/ccpp-physics.git
-        git fetch origin scidocs_test
-        git checkout -B scidocs_test FETCH_HEAD
+        git fetch origin
+        git checkout scidocs_test
 
     - name: Generate metadata tables main branch
       run: |
