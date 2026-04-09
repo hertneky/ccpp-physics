@@ -98,7 +98,7 @@ jobs:
     - name: Generate metadata tables SRWv3 branch
       run: |
         cd scm_repo
-        mkdir -p $GITHUB_WORKSPACE/physics/docs/html/SRWv3
+        mkdir -p ccpp/physics/physics/docs/doc/html
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
         ./ccpp/framework/scripts/metadata2html.py -c $GITHUB_WORKSPACE/ccpp_repo/physics/docs/pdftxt/RE300/ccpp_prebuild_config.py
         mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
