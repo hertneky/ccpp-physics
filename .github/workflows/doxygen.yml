@@ -119,7 +119,7 @@ jobs:
       run: |
         cd scm_repo/ccpp/physics/physics/docs
         doxygen mainpage_doxyfile
-        mv html/* $GITHUB_WORKSPACE/physics/docs/html
+        mv html/*html $GITHUB_WORKSPACE/physics/docs/html
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
