@@ -54,17 +54,17 @@ jobs:
     - name: Generate metadata tables main branch
       run: |
         cd scm_repo
-        mkdir -p ccpp/physics/physics/docs/doc/html
+        mkdir -p ccpp/physics/physics/docs/html/HSD
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
         ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py
-        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
+        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/html/HSD
 
     - name: Build HSD docs
       run: |
         cd scm_repo/ccpp/physics/physics/docs
         doxygen ccpphsd_doxyfile
         mkdir -p $GITHUB_WORKSPACE/physics/docs/html/HSD
-        mv doc/html/* $GITHUB_WORKSPACE/physics/docs/html/HSD
+        mv html/HSD/* $GITHUB_WORKSPACE/physics/docs/html/HSD
 
     - name: Switch to v7 tag
       run: |
@@ -107,6 +107,7 @@ jobs:
       run: |
         cd scm_repo/ccpp/physics/physics/docs
         doxygen ccppsrw_doxyfile
+        mkdir -p $GITHUB_WORKSPACE/physics/docs/html/SRWv3
         mv doc/html/* $GITHUB_WORKSPACE/physics/docs/html/SRWv3
 
     - name: Switch to submodule main (ncar)
