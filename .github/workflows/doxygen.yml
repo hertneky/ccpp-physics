@@ -54,10 +54,10 @@ jobs:
     - name: Generate metadata tables main branch
       run: |
         cd scm_repo
-        mkdir -p ccpp/physics/physics/docs/html/HSD
+        mkdir -p ccpp/physics/physics/docs/doc/html
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
         ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py
-        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/html/HSD
+        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
 
     - name: Build HSD docs
       run: |
@@ -121,7 +121,7 @@ jobs:
       run: |
         cd scm_repo/ccpp/physics/physics/docs
         doxygen mainpage_doxyfile
-        mv html/*.* $GITHUB_WORKSPACE/physics/docs/html
+        mv html/* $GITHUB_WORKSPACE/physics/docs/html
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
