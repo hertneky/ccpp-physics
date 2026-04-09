@@ -54,10 +54,10 @@ jobs:
     - name: Generate metadata tables main branch
       run: |
         cd scm_repo
-        mkdir -p ccpp/physics/physics/docs/doc/html
+        #mkdir -p ccpp/physics/physics/docs
         export PYTHONPATH=$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts:$GITHUB_WORKSPACE/scm_repo/ccpp/framework/scripts/parse_tools
         ./ccpp/framework/scripts/metadata2html.py -c ccpp/config/ccpp_prebuild_config.py
-        mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs/doc/html
+        #mv ccpp/physics/physics/docs/*.html ccpp/physics/physics/docs
 
     - name: Build HSD docs
       run: |
