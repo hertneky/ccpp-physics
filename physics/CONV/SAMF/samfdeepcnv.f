@@ -1865,6 +1865,7 @@ c
               endif
             enddo
          enddo
+         
       else
 !     diagnostic method:
          do k = 2, km1
