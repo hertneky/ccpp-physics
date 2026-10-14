@@ -85,7 +85,7 @@
      &    clam,c0s,c1,betal,betas,evef,pgcon,asolfac,cscale,            &
      &    do_ca, ca_closure, ca_entr, ca_trigger, nthresh,ca_deep,      &
      &    rainevap,sigmain,sigmaout,omegain,omegaout,betadcu,betamcu,   &
-     &    betascu,lbb1,lbb2,lbb3,dt_decay,maxMF,do_mynnedmf,            &
+     &    betascu,lbb1,lbb2,lbb3,maxMF,do_mynnedmf,                     &
      &    sigmab_coldstart,cat_adj_deep,                                &
      &    errmsg,errflg)
 
@@ -106,7 +106,7 @@
       logical, intent(in)  :: first_time_step,restart,hwrf_samfdeep,    &
      &     progsigma,progomega,do_mynnedmf,sigmab_coldstart
       real(kind=kind_phys), intent(in) :: nthresh,betadcu,betamcu,      &
-     &     betascu,lbb1,lbb2,lbb3,dt_decay
+     &     betascu,lbb1,lbb2,lbb3
       real(kind=kind_phys), intent(in), optional :: ca_deep(:)
       real(kind=kind_phys), intent(in), optional :: sigmain(:,:),       &
      &     qmicro(:,:),  prevsq(:,:), omegain(:,:)
@@ -1849,7 +1849,7 @@ c
          
          call progomega_calc(first_time_step,restart,im,km,
      &        kbcon1,ktcon,omegain,delt,del,zi,cnvflg,omegaout,
-     &        grav,buo,drag,wush,lbb1,lbb2,lbb3,dt_decay,1)
+     &        grav,buo,drag,wush,lbb1,lbb2,lbb3,1)
          do k = 1, km
             do i = 1, im
                if (cnvflg(i)) then

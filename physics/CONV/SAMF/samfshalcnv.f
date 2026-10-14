@@ -1583,7 +1583,7 @@ c
          
          call progomega_calc(first_time_step,restart,im,km,
      &        kbcon1,ktcon,omegain,delt,del,zi,cnvflg,omegaout,
-     &        grav,buo,drag,wush,lbb1,lbb2,lbb3,dt_decay,2)
+     &        grav,buo,drag,wush,lbb1,lbb2,lbb3,2)
          do k = 1, km
             do i = 1, im
                if (cnvflg(i)) then
