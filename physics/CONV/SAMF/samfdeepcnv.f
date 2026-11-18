@@ -1884,7 +1884,7 @@ c
       endif
 !                  
       if (progomega) then
-
+         
          if (present(omegaout)) then
             omegaout_loc(:,:) = real(omegaout(:,:), kind=conv_wp)
          else
@@ -1917,7 +1917,7 @@ c
          if (present(omegaout)) then
             omegaout(:,:) = real(omegaout_loc(:,:), kind=kind_phys)
          endif
-
+         
          do k = 1, km
             do i = 1, im
                if (cnvflg(i)) then

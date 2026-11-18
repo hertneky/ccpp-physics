@@ -445,7 +445,7 @@ c
 ! >  - should therefore only be set to zero in shallow cu point.      
       do k = 1, km
          do i = 1, im
-            if(cnvflg(i))then
+            if (cnvflg(i)) then
                cnvw(i,k) = 0.0_kind_phys
                cnvc(i,k) = 0.0_kind_phys
                ud_mf(i,k) = 0.0_kind_phys
@@ -1603,19 +1603,19 @@ c
       endif
 !
       if(progomega)then
-
+         
          if (present(omegaout)) then
             omegaout_loc(:,:) = real(omegaout(:,:), kind=conv_wp)
          else
             omegaout_loc(:,:) = 0.0_conv_wp
          endif
-
+         
          if (present(omegain)) then
             omegain_loc(:,:) = real(omegain(:,:), kind=conv_wp)
          else
             omegain_loc(:,:) = 0.0_conv_wp
          endif
-
+         
 !     Allow convection if there is updraft memory
          do i = 1, im
             if (kcnv(i) == 1) then
@@ -1626,7 +1626,7 @@ c
             
             if (kbcon(i) == kmax(i)) cnvflg(i) = .false.
          enddo
-
+         
          call progomega_calc(first_time_step,restart,im,km,
      &        kbcon1,ktcon,omegain_loc,real(delt,kind=conv_wp),
      &        del,zi,cnvflg,omegaout_loc,real(grav,kind=conv_wp),
