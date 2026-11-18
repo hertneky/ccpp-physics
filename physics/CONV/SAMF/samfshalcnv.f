@@ -180,6 +180,7 @@ cc
       real(kind=conv_wp) :: omegain_loc(im,km), omegaout_loc(im,km)
       real(kind=conv_wp) :: sigmain_loc(im,km), sigmaout_loc(im,km)
       real(kind=conv_wp) :: qmicro_loc(im,km)
+
       logical flag_shallow,flag_mid
 c  physical parameters
 !     parameter(g=grav,asolfac=0.89)
@@ -1601,7 +1602,7 @@ c
       enddo
       endif
 !
-      if (progomega) then
+      if(progomega)then
 
          if (present(omegaout)) then
             omegaout_loc(:,:) = real(omegaout(:,:), kind=conv_wp)
@@ -1636,18 +1637,18 @@ c
          if (present(omegaout)) then
             omegaout(:,:) = real(omegaout_loc(:,:), kind=kind_phys)
          endif
-
+      
          do k = 1, km
             do i = 1, im
                if (cnvflg(i)) then
                   if(k >= kbcon1(i) .and. k < ktcon(i)) then
                      omega_u(i,k)=omegaout_loc(i,k)
                      omega_u(i,k)=MAX(omega_u(i,k),-80.0_conv_wp)
-!      Convert to m/s for use in convective time-scale:
+!     Convert to m/s for use in convective time-scale:
                      rho = po(i,k)*100.0_conv_wp / (real(rd,
-     &                     kind=conv_wp) * to(i,k))
+     &                    kind=conv_wp) * to(i,k))
                      tem = (-omega_u(i,k)) / ((rho * real(grav,
-     &                     kind=conv_wp)))
+     &                    kind=conv_wp)))
                      wu2(i,k) = tem**2
                      wu2(i,k) = max(wu2(i,k), 0.0_conv_wp)
                   endif
@@ -1656,7 +1657,7 @@ c
          enddo
          
       else
-!      diagnostic updraft velocity
+!     diagnostic updraft velocity
          do k = 2, km1
             do i = 1, im
                if (cnvflg(i)) then

@@ -21,7 +21,7 @@ contains
 !! updraft vertical velocity that is used for closure computations in
 !! saSAS and C3 deep and shallow convection.
 !!\section gen_progomega progomega_calc General Algorithm
-  subroutine progomega_calc(first_time_step,flag_restart,im,km,kbcon1,ktcon,omegain,delt,del, &
+    subroutine progomega_calc(first_time_step,flag_restart,im,km,kbcon1,ktcon,omegain,delt,del, &
        zi,cnvflg,omegaout,grav,buo,drag,wush,lbb1,lbb2,lbb3,conv_type)
 
     implicit none
@@ -132,7 +132,7 @@ contains
     !--------------------------------------------------------------------
 
     bb2_prof(:,:) = lbb2
-    bb4_prof(:,:) = 1.0_kind_phys
+    bb4_prof(:,:) = 1.0_conv_wp
 
     do k = 1,km
        do i = 1,im
@@ -141,13 +141,13 @@ contains
              if (k >= kbcon1(i) .and. k < ktcon(i)) then
 
                 ! Cloud-base layer midpoint height [m]
-                zbase = 0.5_kind_phys * &
+                zbase = 0.5_conv_wp * &
                      (zi(i,kbcon1(i)) + zi(i,kbcon1(i)+1))
 
                 ! Layer height above cloud base [km]
-                zkm = (0.5_kind_phys * (zi(i,k) + zi(i,k+1)) - zbase) &
-                     * 0.001_kind_phys
-                zkm = max(zkm,0.0_kind_phys)
+                zkm = (0.5_conv_wp * (zi(i,k) + zi(i,k+1)) - zbase) &
+                     * 0.001_conv_wp
+                zkm = max(zkm,0.0_conv_wp)
 
                 select case (conv_type)
                 case (1)
@@ -161,12 +161,12 @@ contains
                 case default
                    ! Preserve the previous UFS formulation if conv_type
                    ! is not recognized.
-                   cb_loc = 1.0_kind_phys - lbb2
-                   cd_loc = 0.0_kind_phys
+                   cb_loc = 1.0_conv_wp - lbb2
+                   cd_loc = 0.0_conv_wp
                 end select
 
-                bb2_prof(i,k) = 1.0_kind_phys - cb_loc
-                bb4_prof(i,k) = 1.0_kind_phys - cd_loc
+                bb2_prof(i,k) = 1.0_conv_wp - cb_loc
+                bb4_prof(i,k) = 1.0_conv_wp - cd_loc
 
              endif
           endif
@@ -426,7 +426,7 @@ contains
              omegaout(i,k) = omega(i,k)
 
              if (abs(omegaout(i,k)) < omega_eps) then
-                omegaout(i,k) = 0.0_kind_phys
+                omegaout(i,k) = 0.0_conv_wp
              endif
 
           endif
@@ -444,17 +444,15 @@ contains
 
   pure function interp_profile(z,zpts,cpts,npts) result(c)
 
-    use machine, only : kind_phys
-
     implicit none
 
     integer, intent(in) :: npts
-    real(kind=kind_phys), intent(in) :: z
-    real(kind=kind_phys), intent(in) :: zpts(npts)
-    real(kind=kind_phys), intent(in) :: cpts(npts)
+    real(kind=conv_wp), intent(in) :: z
+    real(kind=conv_wp), intent(in) :: zpts(npts)
+    real(kind=conv_wp), intent(in) :: cpts(npts)
 
-    real(kind=kind_phys) :: c
-    real(kind=kind_phys) :: weight
+    real(kind=conv_wp) :: c
+    real(kind=conv_wp) :: weight
     integer :: n
 
     if (z <= zpts(1)) then
